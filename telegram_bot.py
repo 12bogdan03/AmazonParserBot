@@ -66,7 +66,24 @@ def delete_item(bot, update, args):
                                   parse_mode=ParseMode.HTML)
 
 
+def list_items(bot, update):
+    items = session.query(Item).all()
+    if items:
+        text = '<b>Monitored items:</b>\n'
+        for i in items:
+            if i.title:
+                text += '<a href="{}">{}</a> \n\n'.format(i.link, i.title)
+            else:
+                text += '{} \n\n'.format(i.link)
+    else:
+        text = 'No items.'
+    update.message.reply_text(text,
+                              parse_mode=ParseMode.HTML,
+                              disable_web_page_preview=True)
+
+
 dispatcher.add_handler(CommandHandler('start', start))
 dispatcher.add_handler(CommandHandler('add', add_item, pass_args=True))
 dispatcher.add_handler(CommandHandler('delete', delete_item, pass_args=True))
+dispatcher.add_handler(CommandHandler('list', list_items))
 dispatcher.add_error_handler(error_callback)

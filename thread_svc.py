@@ -39,6 +39,9 @@ def check_prices():
         scrapper.go_to(item.link)
         price = scrapper.get_price()
         title = scrapper.get_title()
+        if not item.title:
+            item.title = title
+            session.commit()
         if item.price:
             change_percentage = (abs(price - item.price) / item.price) * 100.0
             if change_percentage >= 3:

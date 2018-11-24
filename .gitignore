@@ -5,5 +5,4 @@ __pycache__/
 *.log
 migrations/
 .env
-drivers/
 try.py

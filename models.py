@@ -21,8 +21,10 @@ class Item(Base):
 
     id = Column(Integer, primary_key=True)
     link = Column(String(500))
+    title = Column(String(500))
     price = Column(Float)
     added_at = Column(DateTime, default=datetime.datetime.now)
 
-    def __init__(self, link):
+    def __init__(self, link, title=None):
         self.link = link
+        self.title = title
