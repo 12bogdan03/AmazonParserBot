@@ -8,12 +8,11 @@ from config import logger, BASEDIR
 
 class Scrapper:
     def __init__(self):
-        chrome_options = Options()
-        chrome_options.add_argument("--headless")
-        self.driver = webdriver.Chrome(os.path.join(BASEDIR,
-                                                    'drivers',
-                                                    'chromedriver'),
-                                       chrome_options=chrome_options)
+        # chrome_options = Options()
+        # chrome_options.add_argument("--headless")
+        self.driver = webdriver.PhantomJS(os.path.join(BASEDIR,
+                                                       'drivers',
+                                                       'phantomjs'))
 
     def __del__(self):
         self.driver.close()
